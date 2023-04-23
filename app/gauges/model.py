@@ -5,7 +5,7 @@ from web3.constants import ADDRESS_ZERO
 
 from app.settings import (
     LOGGER, CACHE, VOTER_ADDRESS,
-    DEFAULT_TOKEN_ADDRESS, WRAPPED_BRIBE_FACTORY_ADDRESS, VE_ADDRESS
+    DEFAULT_TOKEN_ADDRESS, VE_ADDRESS
 )
 from app.assets import Token
 
@@ -94,15 +94,7 @@ class Gauge(Model):
         data['bribeAddress'] = data['bribe_address']
         data['feesAddress'] = data['fees_address']
         data['totalSupply'] = data['total_supply']
-
-        if data.get('bribe_address') not in (ADDRESS_ZERO, None):
-            data['wrapped_bribe_address'] = Call(
-                WRAPPED_BRIBE_FACTORY_ADDRESS,
-                ['oldBribeToNew(address)(address)', data['bribe_address']]
-            )()
-
-        if data.get('wrapped_bribe_address') in (ADDRESS_ZERO, ''):
-            del data['wrapped_bribe_address']
+        data['wrapped_bribe_address'] = data['bribe_address']
 
         # Cleanup old data
         cls.query_delete(cls.address == address.lower())

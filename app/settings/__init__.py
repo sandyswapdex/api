@@ -4,12 +4,14 @@ from __future__ import absolute_import
 import logging
 import os
 import sys
+from dotenv import load_dotenv
 
 import fakeredis
 from honeybadger import honeybadger
 import redis.exceptions
 from walrus import Database
 
+load_dotenv()
 
 def honeybadger_handler(req, resp, exc, params):
     """Custom error handler for exception notifications."""

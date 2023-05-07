@@ -4,6 +4,7 @@ from __future__ import absolute_import
 import os
 import sys
 from logging import StreamHandler
+from dotenv import load_dotenv
 
 import falcon
 from requestlogger import WSGILogger, ApacheFormatter
@@ -15,6 +16,8 @@ from app.pairs import Pairs
 from app.settings import LOGGER, honeybadger_handler
 from app.venfts import Accounts
 from app.supply import Supply
+
+load_dotenv()
 
 app = falcon.App(cors_enable=True, middleware=[CompressionMiddleware()])
 app.add_error_handler(Exception, honeybadger_handler)

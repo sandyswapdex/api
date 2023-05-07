@@ -4,6 +4,7 @@ import os
 from multiprocessing import Process
 from multiprocessing.pool import ThreadPool
 import time
+from dotenv import load_dotenv
 
 from app.pairs import Pairs, Pair
 from app.assets import Assets, Token
@@ -11,6 +12,7 @@ from app.settings import (
     LOGGER, SYNC_WAIT_SECONDS
 )
 
+load_dotenv()
 
 def sync():
     """Syncs """

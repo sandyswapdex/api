@@ -24,7 +24,8 @@ setup(
         'honeybadger == 0.14.0',
         # TODO: Bump when the issue is fixed upstream:
         #     https://github.com/ilanschnell/bitarray/issues/188
-        'bitarray == 2.7.2'
+        'bitarray == 2.7.2',
+        'python-dotenv == 1.0.0'
     ),
     version=":versiontools:app"
 )

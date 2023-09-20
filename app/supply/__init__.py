@@ -4,7 +4,7 @@ import json
 from datetime import timedelta
 
 import falcon
-from multicall import Call, Multicall
+from app.multicall import Call, Multicall
 
 from app.settings import CACHE, DEFAULT_TOKEN_ADDRESS, LOGGER, VE_ADDRESS
 

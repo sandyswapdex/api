@@ -38,8 +38,11 @@ app.add_route('/api/v1/updatePairs', Pairs())
 wsgi = WSGILogger(app, [StreamHandler(sys.stdout)], ApacheFormatter())
 
 if __name__ == '__main__':
-    port = int(os.getenv('PORT') or 3000)
+    port = int(os.getenv('PORT') or 4000)
     LOGGER.info('Starting on port %s ...', port)
+
+    from app.pairs.syncer import sync
+    sync()
 
     import bjoern
     bjoern.run(wsgi, '', port, reuse_port=True)

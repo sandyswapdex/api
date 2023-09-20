@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from multicall import Call
+from app.multicall import Call
 from walrus import Model, TextField, IntegerField, UUIDField
 
 from app.settings import LOGGER, CACHE, DEFAULT_TOKEN_ADDRESS

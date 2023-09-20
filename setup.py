@@ -27,5 +27,5 @@ setup(
         'bitarray == 2.7.2',
         'python-dotenv == 1.0.0'
     ),
-    version=":versiontools:app"
+    # version=":versiontools:app"
 )

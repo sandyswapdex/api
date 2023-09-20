@@ -2,7 +2,7 @@
 
 from datetime import datetime
 
-from multicall import Call, Multicall
+from app.multicall import Call, Multicall
 from walrus import Model, TextField, IntegerField, DateTimeField
 
 from app.rewards import BribeReward, EmissionReward, FeeReward

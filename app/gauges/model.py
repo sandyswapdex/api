@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from multicall import Call, Multicall
+from app.multicall import Call, Multicall
 from walrus import Model, TextField, IntegerField, FloatField, HashField
 from web3.constants import ADDRESS_ZERO
 

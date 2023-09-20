@@ -243,6 +243,8 @@ class Token(Model):
         """Fetches and merges all the tokens from available tokenlists."""
         our_chain_id = w3.eth.chain_id
 
+        print("Fetching token list")
+
         for tlist in TOKENLISTS:
             try:
                 res = requests.get(tlist).json()

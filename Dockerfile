@@ -1,4 +1,4 @@
-FROM pypy:3.9-slim-bullseye
+FROM python:3.9.6
 
 RUN apt-get update
 RUN apt-get install -y --no-install-recommends gcc g++ libssl-dev libev-dev

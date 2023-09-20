@@ -118,7 +118,7 @@ class Call:
             self.state_override_code,
         )
 
-        output = await get_async_w3(_w3).eth.call(*args)
+        output = await get_async_w3(_w3).eth.call(args[0])
 
         return await run_in_subprocess(Call.decode_output, output, self.signature, self.returns)
 

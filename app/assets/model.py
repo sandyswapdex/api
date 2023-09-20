@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from multicall import Call, Multicall
+from app.multicall import Call, Multicall
 import requests
 import requests.exceptions
 from walrus import Model, TextField, IntegerField, FloatField
@@ -186,6 +186,11 @@ class Token(Model):
         except ContractLogicError:
             return 0
 
+        if amount is None:
+            return 0
+        print(amount, stablecoin.decimals)
+
+
         return amount / 10**stablecoin.decimals
 
     @classmethod
@@ -195,6 +200,7 @@ class Token(Model):
             return None
 
         try:
+            print('finding', address.lower())
             return cls.load(address.lower())
         except KeyError:
             return cls.from_chain(address.lower())
@@ -240,7 +246,7 @@ class Token(Model):
         for tlist in TOKENLISTS:
             try:
                 res = requests.get(tlist).json()
-                for token_data in res['tokens']:
+                for token_data in res:
                     # Skip tokens from other chains...
                     if token_data.get('chainId', None) != our_chain_id:
                         continue

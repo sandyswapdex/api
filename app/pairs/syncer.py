@@ -37,6 +37,8 @@ def sync():
         pool.join()
 
     Pairs.recache()
+    Token.from_tokenlists()
+    Assets.recache()
     LOGGER.info('Syncing pairs done in %s seconds.', time.time() - t0)
 
 

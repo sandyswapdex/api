@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    command: redis-server --save 20 1 --loglevel warning
+
+  app:
+    build:
+      context: ./
+    env_file:
+      - .env
+    depends_on:
+      - cache
+    ports:
+      - 4000:4000
+    environment:
+      REDIS_URL: redis://cache
+
+  syncer:
+    build:
+      context: ./
+    env_file:
+      - .env
+    depends_on:
+      - cache
+    command: ["python", "-m", "app.pairs.syncer"]
+    environment:
+      REDIS_URL: redis://cache

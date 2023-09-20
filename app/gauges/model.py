@@ -58,6 +58,7 @@ class Gauge(Model):
         """Fetches pair/pool gauge data from chain."""
         address = address.lower()
 
+        print('get', address)
         pair_gauge_multi = Multicall([
             Call(
                 address,
@@ -71,14 +72,14 @@ class Gauge(Model):
             ),
             Call(
                 VOTER_ADDRESS,
-                ['external_bribes(address)(address)', address],
+                ['bribes(address)(address)', address],
                 [['bribe_address', None]]
             ),
-            Call(
-                VOTER_ADDRESS,
-                ['internal_bribes(address)(address)', address],
-                [['fees_address', None]]
-            )
+            # Call(
+            #     VOTER_ADDRESS,
+            #     ['internal_bribes(address)(address)', address],
+            #     [['fees_address', None]]
+            # )
         ])
 
         data = pair_gauge_multi()
@@ -92,7 +93,7 @@ class Gauge(Model):
 
         # TODO: Remove once no longer needed...
         data['bribeAddress'] = data['bribe_address']
-        data['feesAddress'] = data['fees_address']
+        # data['feesAddress'] = data['fees_address']
         data['totalSupply'] = data['total_supply']
         data['wrapped_bribe_address'] = data['bribe_address']
 
@@ -120,6 +121,8 @@ class Gauge(Model):
             minter_address,
             ['calculate_growth(uint256)(uint256)', weekly]
         )()
+
+        if supply == 0: return 0
 
         return ((growth * 52) / supply) * 100
 

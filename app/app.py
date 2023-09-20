@@ -41,8 +41,8 @@ if __name__ == '__main__':
     port = int(os.getenv('PORT') or 4000)
     LOGGER.info('Starting on port %s ...', port)
 
-    from app.pairs.syncer import sync
-    sync()
+    # from app.pairs.syncer import sync
+    # sync()
 
     import bjoern
     bjoern.run(wsgi, '', port, reuse_port=True)

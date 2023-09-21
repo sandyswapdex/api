@@ -8,6 +8,7 @@ from web3.auto import w3
 from web3.exceptions import ContractLogicError
 
 from app.settings import (
+    DEFAULT_TOKEN_ADDRESS,
     LOGGER, CACHE, TOKENLISTS, ROUTER_ADDRESS, STABLE_TOKEN_ADDRESS,
     IGNORED_TOKEN_ADDRESSES
 )
@@ -171,6 +172,9 @@ class Token(Model):
         # Peg it forever.
         if self.address == STABLE_TOKEN_ADDRESS:
             return 1.0
+
+        if self.address == DEFAULT_TOKEN_ADDRESS:
+            return 0.0001
 
         stablecoin = Token.find(STABLE_TOKEN_ADDRESS)
         try:
